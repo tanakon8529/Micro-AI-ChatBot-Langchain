@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "b595b039-851a-475e-8f98-7993abb718d0",
+		"name": "Micro-AI-ChatBot-Langchain",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20136183"
+	},
+	"item": [
+		{
+			"name": "Oauth",
+			"item": [
+				{
+					"name": "Generate Access Token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"access_token\", pm.response.json().access_token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "client-id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "client-secret",
+								"value": "{{client_secret}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_oauth}}/v1/token/",
+							"host": [
+								"{{url_oauth}}"
+							],
+							"path": [
+								"v1",
+								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Protected Access Token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_oauth}}/v1/protected/",
+							"host": [
+								"{{url_oauth}}"
+							],
+							"path": [
+								"v1",
+								"protected",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Langgpt",
+			"item": [
+				{
+					"name": "Ask AI Chatbot",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": \"dev_test007\",\n    \"topic_id\": \"001\",\n    \"question\": \"What you knowledge?\",\n    \"model\": \"GPT\"\n}\n// {\n//     \"user_id\": \"dev_test007\",\n//     \"topic_id\": \"001\",\n//     \"question\": \"Check in vector store, what data in store?\",\n//     \"model\": \"GPT\"\n// }\n// {\n//     \"user_id\": \"dev_test007\",\n//     \"topic_id\": \"001\",\n//     \"question\": \"Starwar how main cast?\",\n//     \"model\": \"GPT\"\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_langgpt}}/v1/ask/",
+							"host": [
+								"{{url_langgpt}}"
+							],
+							"path": [
+								"v1",
+								"ask",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get conversation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": \"dev_test007\",\n    \"topic_id\": \"001\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_langgpt}}/v1/conversation/",
+							"host": [
+								"{{url_langgpt}}"
+							],
+							"path": [
+								"v1",
+								"conversation",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test Route AI Chatbot",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"input_number_qa\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_langgpt}}/v1/test/",
+							"host": [
+								"{{url_langgpt}}"
+							],
+							"path": [
+								"v1",
+								"test",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
