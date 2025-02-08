@@ -1,9 +1,3 @@
-# Micro-AI-ChatBot-Langchain
-```
-
-has been updated to 
-
-```
 # 🤖 Micro-AI-ChatBot-Langchain
 
 A powerful, microservices-based AI chatbot built with FastAPI, LangChain, and Redis, featuring OAuth2 authentication and vector-based conversation memory.
