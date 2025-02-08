@@ -1,0 +1,37 @@
+# API
+API_VERSION=1.0.0
+API_PATH_FASTAPI_OAUTH2=/oauth
+API_PATH_FASTAPI_AI_CHAT=/langgpt
+
+API_DOC=/docs
+REQUEST_QUEUE_SIZE=10
+DEFAULT_NETWORK=web
+HOST=0.0.0.0
+
+PORT_FASTAPI_OAUTH2=8001
+PORT_FASTAPI_AI_CHAT=8002
+
+#### AUTHENTICATION ####
+USERNAME_ADMIN=ai_develop_01
+PASSWORD_ADMIN=xxxxx
+
+#### REDIS ####
+REDIS_HOST=redis-local
+REDIS_PORT=6379
+
+#### AI Settings ####
+TEMPERATURE=0.5
+BUILD_VECTOR_STORE=False # True or False
+CLEAR_CACHE=False # True or False
+
+#### OpenAI ####
+OPENAI_API_KEY=xxxxxxxxxxxxxxxxx
+MODEL_ID_GPT=chatgpt-4o-latest
+PERSIST_DIRECTORY=/app/service/data/faiss_index # PATH IN CONTAINER
+PDF_DIRECTORY_PATH=/app/service/data # PATH IN CONTAINER
+
+#### AWS ####
+AWS_ACCESS_KEY_ID=xxxxx
+AWS_SECRET_ACCESS_KEY=xxxxx
+AWS_REGION_NAME=us-west-2
+MODEL_ID_CLAUDE=anthropic.claude-3-5-sonnet-20240620-v1:0

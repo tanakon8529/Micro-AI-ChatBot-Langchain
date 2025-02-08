@@ -1,0 +1,50 @@
+services:
+
+  ##########################################################################################
+  ### FastAPI
+  ##########################################################################################
+
+  fastapi-oauth2:
+    build:
+      context: ./backend
+      dockerfile: fastapi-oauth2/dockerfile
+    ports:
+      - '${PORT_FASTAPI_OAUTH2}:${PORT_FASTAPI_OAUTH2}'
+    volumes:
+      - ./backend/fastapi-oauth2/logs:/app/service/logs
+    env_file:
+      - .env
+    networks:
+      - web
+
+  fastapi-ai-chat:
+    build:
+      context: ./backend
+      dockerfile: fastapi-ai-chat/dockerfile
+    ports:
+      - '${PORT_FASTAPI_AI_CHAT}:${PORT_FASTAPI_AI_CHAT}'
+    volumes:
+      - ./backend/fastapi-ai-chat/logs:/app/service/logs
+      - ./backend/fastapi-ai-chat/data/faiss_index:/app/service/data/faiss_index
+    env_file:
+      - .env
+    networks:
+      - web
+
+  redis-local:
+    image: redis:latest
+    ports:
+      - '${REDIS_PORT}:${REDIS_PORT}'
+    volumes:
+      - redis_data:/data
+    networks:
+      - web
+    command: ["redis-server", "--appendonly", "yes"]
+
+networks:
+  web:
+    driver: bridge
+
+volumes:
+  redis_data:
+    driver: local
