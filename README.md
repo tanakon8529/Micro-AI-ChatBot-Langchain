@@ -96,6 +96,93 @@ Complete API documentation is available in the Postman collection:
 - `postman/Micro-AI-ChatBot-Langchain.postman_collection.json`
 - `postman/Micro-AI-ChatBot-Langchain (Dev).postman_environment.json`
 
+## 🚀 CI/CD Pipeline
+
+This project includes mockup GitHub Actions workflows for CI/CD. These are templates that you can customize for your needs.
+
+### Workflow Templates
+
+1. **Test (`test.yml`)**
+   - Template for running unit tests, integration tests, and load tests
+   - Includes mock Redis service setup
+   - Placeholders for test commands and coverage reporting
+   - ⚠️ **Customize**: Add your actual test commands and dependencies
+
+2. **Build and Push (`build-and-push.yml`)**
+   - Template for building and pushing Docker images to ECR
+   - Mock steps for AWS authentication and ECR operations
+   - ⚠️ **Customize**: Update AWS region, repository names, and build commands
+
+3. **Deploy (`deploy.yml`)**
+   - Template for ECS deployment
+   - Mock steps for updating task definitions and services
+   - ⚠️ **Customize**: Add your cluster, service names, and health checks
+
+### Required Secrets
+
+Add these to your GitHub repository settings:
+```bash
+AWS_ROLE_ARN          # For AWS authentication
+MOCK_API_KEY          # Example API key - replace with your actual secrets
+```
+
+### How to Use These Templates
+
+1. **Setup**:
+   - Copy the workflow files to your `.github/workflows` directory
+   - Update environment variables in each workflow
+   - Replace mock commands with your actual commands
+
+2. **Customization Points**:
+   - Look for `# CUSTOMIZE:` comments in the workflows
+   - Replace mock commands (echo statements) with real commands
+   - Update service names and AWS resource identifiers
+   - Add your specific build and test requirements
+
+3. **Testing Locally**:
+   ```bash
+   # Test workflow syntax
+   act -n
+
+   # Run workflows locally (requires act)
+   act -j test
+   act -j build
+   act -j deploy
+   ```
+
+### AWS Infrastructure Requirements
+
+1. **ECR Setup**:
+   ```bash
+   # Create repositories
+   aws ecr create-repository --repository-name my-app
+   ```
+
+2. **ECS Setup**:
+   ```bash
+   # Create cluster
+   aws ecs create-cluster --cluster-name my-cluster
+
+   # Create service
+   aws ecs create-service ...
+   ```
+
+3. **IAM Roles**:
+   - GitHub Actions role
+   - ECS task execution role
+   - ECS task role
+
+### Local Development
+
+For local testing without AWS:
+```bash
+# Run mock tests
+./mock_tests.sh
+
+# Build locally
+docker compose up --build
+```
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
