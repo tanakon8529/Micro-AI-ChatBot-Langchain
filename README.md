@@ -183,6 +183,57 @@ For local testing without AWS:
 docker compose up --build
 ```
 
+## 📦 Release Process
+
+This project uses semantic-release for automated versioning and changelog generation. Releases are triggered automatically on the main branch based on conventional commit messages.
+
+### Commit Message Format
+
+Follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
+
+```
+<type>(<scope>): <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+Types that trigger releases:
+- `feat`: Minor release (new feature)
+- `fix`: Patch release (bug fix)
+- `perf`: Patch release (performance improvement)
+- `docs`: Patch release (if scope is "readme")
+- `BREAKING CHANGE`: Major release (in commit body)
+
+Examples:
+```bash
+feat(api): add new chat endpoint
+fix(auth): resolve token validation issue
+docs(readme): update installation guide
+perf(cache): improve Redis query performance
+```
+
+### Automatic Releases
+
+The release workflow:
+1. Analyzes commits since last release
+2. Determines version bump (major.minor.patch)
+3. Generates CHANGELOG.md
+4. Creates GitHub release
+5. Tags Docker images with version
+
+### Manual Release
+
+For manual releases (if needed):
+```bash
+# Install dependencies
+npm install
+
+# Run semantic-release locally
+npx semantic-release
+```
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

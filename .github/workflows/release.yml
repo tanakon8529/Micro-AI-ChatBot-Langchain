@@ -1,0 +1,74 @@
+# This workflow handles automatic versioning and release creation
+name: Release
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+
+      # Install semantic-release and plugins
+      - name: Install dependencies
+        run: |
+          npm install -g semantic-release
+          npm install -g @semantic-release/git
+          npm install -g @semantic-release/changelog
+          npm install -g @semantic-release/exec
+
+      # Create or update release.config.js
+      - name: Setup release config
+        run: |
+          cat > release.config.js << 'EOF'
+          module.exports = {
+            branches: ['main'],
+            plugins: [
+              '@semantic-release/commit-analyzer',
+              '@semantic-release/release-notes-generator',
+              '@semantic-release/changelog',
+              ['@semantic-release/git', {
+                'assets': ['CHANGELOG.md', 'package.json'],
+                'message': 'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
+              }],
+              ['@semantic-release/github', {
+                'assets': []
+              }],
+              ['@semantic-release/exec', {
+                'prepareCmd': 'echo ${nextRelease.version} > VERSION'
+              }]
+            ]
+          };
+          EOF
+
+      # Run semantic-release
+      - name: Create Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
+
+      # Update version in relevant files
+      - name: Update version references
+        if: steps.semantic.outputs.new_release_published == 'true'
+        run: |
+          VERSION=$(cat VERSION)
+          # Update version in relevant files
+          echo "Updated to version $VERSION"
+          
+          # Optional: Create version tag for build workflow
+          git tag -a "v$VERSION" -m "Release version $VERSION"
+          git push origin "v$VERSION"
