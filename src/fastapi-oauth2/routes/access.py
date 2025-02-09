@@ -8,6 +8,12 @@ from core.auth import valid_access_token
 
 router = APIRouter()
 
+# Health check endpoint
+@router.get("/v1/health/")
+async def health_check() -> Dict[str, str]:
+    """Health check endpoint for the OAuth service"""
+    return {"status": "healthy", "service": "oauth"}
+
 # Route to get access token
 @router.post("/v1/token/")
 async def generate_access_token(

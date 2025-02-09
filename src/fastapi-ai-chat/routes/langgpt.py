@@ -14,6 +14,12 @@ from apis.langgpt.mainmod import get_conversation_history, ai_langchain_ask, ai_
 
 router = APIRouter()
 
+# Health check endpoint
+@router.get("/v1/health/")
+async def health_check() -> Dict[str, str]:
+    """Health check endpoint for the AI Chat service"""
+    return {"status": "healthy", "service": "ai-chat"}
+
 @router.post("/v1/conversation/")
 async def conversation_history(
     data: Optional[DynamicBaseModel] = None,
