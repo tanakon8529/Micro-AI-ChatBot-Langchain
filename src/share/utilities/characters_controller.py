@@ -1,4 +1,4 @@
-# /utilities/characters_controler.py
+# /utilities/characters_controller.py
 
 import re
 

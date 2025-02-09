@@ -4,8 +4,8 @@ import string
 import logging
 
 from utilities.redis_connector import get_client
-from utilities.time_controler import get_current_date
-from utilities.json_controler import data_string_to_json_load, data_string_or_dict_to_json_dump
+from utilities.time_controller import get_current_date
+from utilities.json_controller import data_string_to_json_load, data_string_or_dict_to_json_dump
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -29,7 +29,7 @@ def generate_RegRefCode(length=8):
     return ''.join(code_chars)
 
 
-class CookieControler:
+class Cookiecontroller:
     def __init__(self):
         self.redis = get_client()
         self.session_expire_in_3_month = 7776000
