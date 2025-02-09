@@ -34,7 +34,7 @@ from settings.configs import OPENAI_API_KEY, MODEL_ID_GPT, MODEL_ID_CLAUDE, PERS
 from utilities.llm.openai_llm import OpenAIChatLLM
 from utilities.llm.aws_bedrock_claude import AWSBedrockClaude
 from utilities.bot_profiles import BotProfiles
-from utilities.cache_controler import CacheAnswer
+from utilities.cache_controller import CacheAnswer
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
