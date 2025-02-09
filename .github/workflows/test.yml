@@ -1,0 +1,68 @@
+# This is a mockup CI workflow for testing. Customize according to your needs.
+name: Test
+
+# Trigger on push to main/develop and pull requests
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    
+    # Mock Redis service - Replace with your actual database needs
+    services:
+      redis:
+        image: redis:latest
+        ports:
+          - 6379:6379
+
+    steps:
+      - uses: actions/checkout@v3
+
+      # CUSTOMIZE: Change Python version if needed
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+          
+      # CUSTOMIZE: Add your actual test dependencies
+      - name: Install dependencies
+        run: |
+          echo "Installing project dependencies..."
+          # pip install -r requirements.txt
+          # pip install pytest pytest-cov
+
+      # CUSTOMIZE: Add your actual unit test commands
+      - name: Run unit tests
+        run: |
+          echo "Running unit tests..."
+          # pytest tests/unit --cov=src
+          exit 0  # Mock success - Replace with actual tests
+
+      # CUSTOMIZE: Add your actual integration test commands
+      - name: Run integration tests
+        env:
+          # Add your required environment variables
+          MOCK_API_KEY: ${{ secrets.MOCK_API_KEY }}
+        run: |
+          echo "Running integration tests..."
+          # pytest tests/integration
+          exit 0  # Mock success - Replace with actual tests
+
+      # CUSTOMIZE: Add your actual load test commands
+      - name: Run load tests
+        run: |
+          echo "Running load tests..."
+          # k6 run tests/load/test.js
+          exit 0  # Mock success - Replace with actual tests
+
+      # CUSTOMIZE: Add your coverage reporting
+      - name: Upload coverage
+        run: |
+          echo "Uploading test coverage..."
+          # Replace with actual coverage upload
+          exit 0

@@ -1,0 +1,61 @@
+# This is a mockup workflow for building and pushing Docker images to ECR
+name: Build and Push to ECR
+
+# Trigger on push to main and version tags
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*.*.*' ]
+
+env:
+  # CUSTOMIZE: Update these variables for your AWS setup
+  AWS_REGION: us-east-1  # Change to your AWS region
+  ECR_REPO_PREFIX: my-app  # Change to your ECR repository prefix
+
+jobs:
+  build:
+    name: Build and Push Images
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+
+      # CUSTOMIZE: Use your AWS authentication method
+      - name: Configure AWS credentials
+        run: |
+          echo "Configuring AWS credentials..."
+          # Replace with actual AWS credentials setup
+          exit 0
+
+      # CUSTOMIZE: Add your actual ECR login
+      - name: Login to Amazon ECR
+        run: |
+          echo "Logging into ECR..."
+          # aws ecr get-login-password | docker login ...
+          exit 0
+
+      # CUSTOMIZE: Add your actual build commands
+      - name: Build images
+        run: |
+          echo "Building Docker images..."
+          # docker build -t my-service1 ./service1
+          # docker build -t my-service2 ./service2
+          exit 0
+
+      # CUSTOMIZE: Add your actual push commands
+      - name: Push images
+        run: |
+          echo "Pushing to ECR..."
+          # docker push my-service1:latest
+          # docker push my-service2:latest
+          exit 0
+
+      # CUSTOMIZE: Add your version tagging logic
+      - name: Tag version
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          echo "Tagging version..."
+          # VERSION=${GITHUB_REF#refs/tags/}
+          # docker tag my-service1 my-service1:$VERSION
+          # docker push my-service1:$VERSION
+          exit 0
