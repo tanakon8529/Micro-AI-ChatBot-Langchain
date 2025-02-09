@@ -1,0 +1,74 @@
+# FastAPI - a modern, fast (high-performance), web framework for building APIs with Python 3.7+ based on standard Python type hints.
+fastapi==0.108.0
+
+# Uvicorn - an ASGI web server implementation for Python.
+uvicorn==0.25.0
+
+# Redis - a Python client for Redis key-value store.
+redis==5.2.0
+
+# python-dotenv - a Python module that reads key-value pairs from a .env file and sets them as environment variables.
+python-dotenv==1.0.0
+
+# Loguru - a library which aims to bring enjoyable logging in Python.
+loguru==0.7.2
+
+# Pydantic - a data validation and settings management using Python type annotations.
+pydantic>=2.7.4,<3.0.0
+
+# python-jose - a JavaScript Object Signing and Encryption (JOSE) implementation in Python.
+python-jose[cryptography]==3.3.0
+
+# argon2-cffi - a Python CFFI bindings for the Argon2 password hashing algorithm.
+argon2-cffi==23.1.0
+
+# python-multipart - a Python module for parsing multipart/form-data.
+python-multipart==0.0.9
+
+# FAISS - Facebook AI Similarity Search (Ensure you have FAISS installed appropriately)
+faiss-cpu==1.8.0.post1
+
+# pypdf - a Python library to read and write PDF files.
+pypdf==5.0.1
+
+# numpy - a Python library for numerical computing.
+# langchain-community 0.3.1 requires numpy<2.0.0 and >=1.26.0
+numpy>=1.26.0,<2.0.0
+
+# langdetect - a language detection library for Python.
+langdetect==1.0.9
+
+# pythainlp - a Python library for Thai natural language processing.
+pythainlp==5.0.4
+
+# python-crfsuite - a Python binding to CRFsuite.
+# for nltk
+python-crfsuite==0.9.11
+
+# nltk - a Python library for natural language processing.
+nltk==3.9.1
+
+# boto3 - an Amazon Web Services (AWS) SDK for Python.
+boto3==1.35.54
+
+# gunicorn - a Python WSGI HTTP Server for UNIX.
+gunicorn==23.0.0
+
+# OpenAI - OpenAI API client.
+openai==1.61.1
+
+# LangChain and related libraries
+langchain_openai==0.3.4
+langchain_community==0.3.17
+
+# scikit-learn - a Python library for machine learning.
+scikit-learn==1.6.1
+
+# FOT TESTS USE
+pytest==8.1.1
+pytest-cov==4.1.0
+pytest-asyncio==0.23.5
+httpx==0.27.0
+aiohttp==3.9.3
+requests==2.31.0
+pytest-env==1.1.3
